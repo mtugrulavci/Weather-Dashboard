@@ -17,6 +17,7 @@ var storage = JSON.parse(localStorage.getItem('searchList')) || [];
 
 
 
+
 function createPage(data){
   imageDaily.innerHTML = "";
   var icon = data.weather[0].icon;
@@ -41,6 +42,9 @@ imageDaily.appendChild(image_d);
 
   // store search values in the array initially created 
   storage.push(data.name);
+  storage.reverse();
+  storage.splice(10);
+
   // set values to the to the storage after making it string
 
 
@@ -48,6 +52,7 @@ imageDaily.appendChild(image_d);
   for(var i = 0; i< storage.length; i++){
     searchList.innerHTML += `<button id=${i}>  ${storage[i]}  </button>` ;
   }
+  storage.reverse();
   localStorage.setItem('searchList', JSON.stringify(storage));
 }
 
