@@ -11,19 +11,50 @@ header{
     padding: 5px;
 }
 
-input, button {
+input{
     display: block;
     width: 100%; 
-
 }
 button {
+    display: block;
+    margin: 10px;
+    margin: auto;
+    width: 80%; 
+    align-items: center;
+
+}
+.searchBtn{
     background:dodgerblue ;
     color:white;
-
+    align-items: center;
+    margin: auto;
+    width: 90%; 
+    margin: 10px;
 
 }
 .form{
     padding: 10px;
     border-bottom: gray solid 2px;
+    margin-bottom: 10px;
 
+
+}
+.weatherContainer{
+    border: black;
+    border-radius: 15%;
+    display: inline-block;
+}
+.mainContainer{
+    border: solid grey 2px;
+    margin: 10px;
+}
+.flex-daily{
+    display: inline-block;
+}
+article {
+    display: inline-block;
+
+}
+.searchList{
+    margin: 10px;
 }
