@@ -17,11 +17,9 @@ input{
 }
 button {
     display: block;
-    margin: 10px;
     margin: auto;
     width: 80%; 
     align-items: center;
-
 }
 .searchBtn{
     background:dodgerblue ;
@@ -57,4 +55,11 @@ article {
 }
 .searchList{
     margin: 10px;
+}
+.btnDist{
+    margin-top: 10px;
+}
+.divInline{
+    display: inline-block;
+    margin: 2px;
 }
