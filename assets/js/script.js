@@ -111,7 +111,7 @@ fetch(apiUrl).then(function(response) {
           var lon = data.coord.lon;
           var apiUrlUv =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=95692f2c0e1a1b5e25327de5d590734c`
           // nested api
-         return fetch(apiUrlUv)
+         return fetch(apiUrlUv);
           }).then(function(response) {
             return response.json();
           }).then(function(uv){
