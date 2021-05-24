@@ -39,7 +39,7 @@ function createForecastPage(data)  {
     forecast.appendChild(foreEl);
   }
 };
-
+// fetch UV info from nested API
 function fetchUv (uv){
 uvi.innerHTML = "";
 var pUvi = document.createElement("p");
@@ -82,7 +82,7 @@ function createDailyPage(data){
   // set values to the to the storage after making it string -the local storage datalist is coming when you search a city
   searchList.innerHTML = "" ;
   for(var i = 0; i< storage.length; i++){
-    searchList.innerHTML += `<button class ="btnDist btn btn-secondary btn-sm" id=${i}>  ${storage[i]}  </button>` ;
+    searchList.innerHTML += `<button class ="btnDist btn btn-secondary btn-sm" >  ${storage[i]}  </button>` ;
   }
   storage.reverse();
   localStorage.setItem('searchList', JSON.stringify(storage)); 
@@ -128,7 +128,7 @@ fetch(apiUrlFive).then(function(response) {
       // request was successful
       if (response.ok) {
           response.json().then(function(data) {
-              console.log(data)
+              console.log(data);
               createForecastPage(data)         
             });
           } else {
@@ -138,9 +138,14 @@ fetch(apiUrlFive).then(function(response) {
       };
 
 searchBtn.addEventListener("click", getData);
-document.querySelector("#buttons").addEventListener("click", function(e){
-  document.querySelector("#searchTerm").value =e.target.textContent;
 
+document.querySelector("#buttons").addEventListener("click", function(e){
+  console.log(e);
+  if(e.target.nodeName ==="BUTTON") { 
+  document.querySelector("#searchTerm").value =  e.target.textContent;}
+  else{
+    return;
+  }
   getData()
 });
 
