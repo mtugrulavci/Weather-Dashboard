@@ -10,7 +10,9 @@ header{
     text-align: center;
     padding: 5px;
 }
-
+.hone {
+text-align: center;
+}
 input{
     display: block;
     width: 100%; 
@@ -34,11 +36,9 @@ button {
     padding: 10px;
     border-bottom: gray solid 2px;
     margin-bottom: 10px;
-
-
 }
 .weatherContainer{
-    border: black;
+ 
     border-radius: 15%;
     display: inline-block;
 }
@@ -48,6 +48,7 @@ button {
 }
 .flex-daily{
     display: inline-block;
+    margin: auto;
 }
 article {
     display: inline-block;
@@ -61,5 +62,8 @@ article {
 }
 .divInline{
     display: inline-block;
-    margin: 2px;
+    margin: 5px;
+}
+.gray{
+    background-color:lightgray;
 }

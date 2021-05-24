@@ -1,6 +1,3 @@
-
-
-
 var searchBtn = document.querySelector(".searchBtn");
 var weatherContainer = document.querySelector(".weatherContainer");
 var dailyForecats = document.querySelector (".dailyForecat");
@@ -10,7 +7,6 @@ var wind = document.querySelector(".wind");
 var uvi = document.querySelector(".uvi");
 var imageDaily = document.querySelector(".imageD");
 var searchList = document.querySelector(".searchList");
-
 var forecast = document.querySelector(".forecast");
 
 // Create a local storage array to store search items
@@ -26,7 +22,7 @@ function createForecastPage(data)  {
     var image_f = document.createElement("img"); // create and img to house the icon
       image_f.src = iconForeUrl; //Add the icon url to the img
     var foreEl = document.createElement("div");
-      foreEl.classList = "bg-secondary text-white divInline";
+      foreEl.classList = "btn btn-info text-white divInline";
     var dt = document.createElement("p");
       dt.textContent = date;
     var pTemp = document.createElement("p");
@@ -77,39 +73,33 @@ function createDailyPage(data){
 
   // city name, date and icon is represented on the html 
   weatherContainer.innerHTML = `<h2> ${cityData} </h2>`;
-
   temperature.innerHTML= "  Temperature : " + data.main.temp + " K";
   humidity.innerHTML = "  Humidity : " + data.main.humidity + " %";
   wind.innerHTML = "  Wind : " + data.wind.speed + " MPH";
-  //uvi.innerHTML= "  UV Index : " + data.current.uvi; 
-// 5 day forecats code here
- 
-
-
-
-
   // store search values in the array initially created 
   storage.push(data.name);
   storage.reverse();
   storage.splice(10);
-
-  // set values to the to the storage after making it string
-
-
+  // set values to the to the storage after making it string -the local storage datalist is coming when you search a city
   searchList.innerHTML = "" ;
   for(var i = 0; i< storage.length; i++){
     searchList.innerHTML += `<button class ="btnDist btn btn-secondary btn-sm" id=${i}>  ${storage[i]}  </button>` ;
   }
   storage.reverse();
-localStorage.setItem('searchList', JSON.stringify(storage));
+  localStorage.setItem('searchList', JSON.stringify(storage)); 
 }
+//to have the local storage data on the page even though you don"t search a city, the for loop is also applied outside of the class
+storage.reverse(); // reversed multiple times to get the latest one always up
+for(var i = 0; i< storage.length; i++){
+  searchList.innerHTML += `<button class ="btnDist btn btn-secondary btn-sm" id=${i}>  ${storage[i]}  </button>` ;
+}
+storage.reverse(); // reversed again to keep it that way 
 
 
 function getData (searchTerm){
 var searchTerm = document.querySelector("#searchTerm").value;
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm +  "&appid=95692f2c0e1a1b5e25327de5d590734c";
 var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`;
-
 
 fetch(apiUrl).then(function(response) {
     // request was successful
@@ -120,8 +110,8 @@ fetch(apiUrl).then(function(response) {
           var lat = data.coord.lat;
           var lon = data.coord.lon;
           var apiUrlUv =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=95692f2c0e1a1b5e25327de5d590734c`;
+          // nested api
          return fetch(apiUrlUv);
-
           }).then(function(response) {
             return response.json();
           }).then(function(data){
@@ -129,24 +119,11 @@ fetch(apiUrl).then(function(response) {
             console.log(data.current.uvi)
             fetchUv(data)
           });
-
         } else {
           alert("Error: " + response.statusText);
         }
       });
-      /*
-fetch(apiUrlUv).then(function(response) {
-        // request was successful
-    if (response.ok) {
-        response.json().then(function(uv) {
-          console.log(uv)
-          fetchUv (uv)
-              });
-    } else {
-          alert("Error: " + response.statusText);
-            }
-      });*/
-
+      // fetch for 5 day forecast
 fetch(apiUrlFive).then(function(response) {
       // request was successful
       if (response.ok) {
