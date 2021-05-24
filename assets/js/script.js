@@ -140,6 +140,7 @@ fetch(apiUrlFive).then(function(response) {
 searchBtn.addEventListener("click", getData);
 document.querySelector("#buttons").addEventListener("click", function(e){
   document.querySelector("#searchTerm").value =e.target.textContent;
+
   getData()
 });
 

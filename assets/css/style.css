@@ -20,7 +20,7 @@ input{
 button {
     display: block;
     margin: auto;
-    width: 80%; 
+    width: 100%; 
     align-items: center;
 }
 .searchBtn{
@@ -28,18 +28,17 @@ button {
     color:white;
     align-items: center;
     margin: auto;
-    width: 90%; 
-    margin: 10px;
+    width: 100%; 
+    margin-top: 8px;
+
 
 }
 .form{
-    padding: 10px;
+    padding-bottom: 10px;
     border-bottom: gray solid 2px;
     margin-bottom: 10px;
 }
 .weatherContainer{
- 
-    border-radius: 15%;
     display: inline-block;
 }
 .mainContainer{
@@ -55,10 +54,10 @@ article {
 
 }
 .searchList{
-    margin: 10px;
+
 }
 .btnDist{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .divInline{
     display: inline-block;
