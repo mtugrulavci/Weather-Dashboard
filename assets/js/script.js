@@ -7,6 +7,7 @@ var dailyForecats = document.querySelector (".dailyForecat");
 var temperature = document.querySelector(".temp");
 var humidity = document.querySelector(".humidity");
 var wind = document.querySelector(".wind");
+var uvi = document.querySelector(".uvi");
 var imageDaily = document.querySelector(".imageD");
 var searchList = document.querySelector(".searchList");
 
@@ -17,7 +18,7 @@ var storage = JSON.parse(localStorage.getItem('searchList')) || [];
 
 function createForecastPage(data)  {
   forecast.innerHTML = "";
-  for(var i = 0; i< data.list.length; i++){
+  for(var i = 5; i< data.list.length; i+=8){
     var icon = data.list[i].weather[0].icon;
     var iconForeUrl = "http://openweathermap.org/img/w/"+ icon +".png";  // get the icon link
     var date = moment(data.list[i].dt*1000).format("DD MMM YYYY");
@@ -41,9 +42,25 @@ function createForecastPage(data)  {
     foreEl.appendChild(pWind);
     forecast.appendChild(foreEl);
   }
-
 };
 
+function fetchUv (data){
+uvi.innerHTML = "";
+console.log("here")
+var pUvi = document.createElement("p");
+pUvi.textContent= "  UV Index :  "; 
+var pSpan = document.createElement("span");
+if (data.current.uvi>5){
+pSpan.classList = "btn btn-danger"}
+else if(data.current.uvi>2){
+  pSpan.classList = "btn btn-warning"}
+else{
+  pSpan.classList = "btn btn-success"}
+
+pSpan.textContent = data.current.uvi
+pUvi.appendChild(pSpan)
+uvi.appendChild(pUvi);
+}
 
 function createDailyPage(data){
   imageDaily.innerHTML = "";
@@ -64,6 +81,7 @@ function createDailyPage(data){
   temperature.innerHTML= "  Temperature : " + data.main.temp + " K";
   humidity.innerHTML = "  Humidity : " + data.main.humidity + " %";
   wind.innerHTML = "  Wind : " + data.wind.speed + " MPH";
+  //uvi.innerHTML= "  UV Index : " + data.current.uvi; 
 // 5 day forecats code here
  
 
@@ -92,17 +110,42 @@ var searchTerm = document.querySelector("#searchTerm").value;
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm +  "&appid=95692f2c0e1a1b5e25327de5d590734c";
 var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`;
 
+
 fetch(apiUrl).then(function(response) {
     // request was successful
     if (response.ok) {
         response.json().then(function(data) {
             console.log(data)
           createDailyPage(data)
+          var lat = data.coord.lat;
+          var lon = data.coord.lon;
+          var apiUrlUv =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=95692f2c0e1a1b5e25327de5d590734c`;
+         return fetch(apiUrlUv);
+
+          }).then(function(response) {
+            return response.json();
+          }).then(function(data){
+            console.log(data)
+            console.log(data.current.uvi)
+            fetchUv(data)
           });
+
         } else {
           alert("Error: " + response.statusText);
         }
       });
+      /*
+fetch(apiUrlUv).then(function(response) {
+        // request was successful
+    if (response.ok) {
+        response.json().then(function(uv) {
+          console.log(uv)
+          fetchUv (uv)
+              });
+    } else {
+          alert("Error: " + response.statusText);
+            }
+      });*/
 
 fetch(apiUrlFive).then(function(response) {
       // request was successful
@@ -116,4 +159,5 @@ fetch(apiUrlFive).then(function(response) {
           }
         });
       };
+
 searchBtn.addEventListener("click", getData);
