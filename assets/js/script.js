@@ -40,19 +40,19 @@ function createForecastPage(data)  {
   }
 };
 
-function fetchUv (data){
+function fetchUv (uv){
 uvi.innerHTML = "";
 var pUvi = document.createElement("p");
 pUvi.textContent= "  UV Index :  "; 
 var pSpan = document.createElement("span");
-if (data.current.uvi>5){
+if (uv.current.uvi>5){
 pSpan.classList = "btn btn-danger"}
-else if(data.current.uvi>2){
+else if(uv.current.uvi>2){
   pSpan.classList = "btn btn-warning"}
 else{
   pSpan.classList = "btn btn-success"}
 
-pSpan.textContent = data.current.uvi
+pSpan.textContent = uv.current.uvi
 pUvi.appendChild(pSpan)
 uvi.appendChild(pUvi);
 }
@@ -114,10 +114,10 @@ fetch(apiUrl).then(function(response) {
          return fetch(apiUrlUv)
           }).then(function(response) {
             return response.json();
-          }).then(function(data){
-            console.log(data)
-            console.log(data.current.uvi)
-            fetchUv(data);
+          }).then(function(uv){
+            console.log(uv)
+            console.log(uv.current.uvi)
+            fetchUv(uv);
           });
         } else {
           alert("Error: " + response.statusText);
