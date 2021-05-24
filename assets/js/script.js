@@ -98,18 +98,18 @@ storage.reverse(); // reversed again to keep it that way
 function getData (searchTerm){
 var searchTerm = document.querySelector("#searchTerm").value;
 //var resultBtn = document.querySelector("#buttons").value;
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c";
-var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`;
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c"
+var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`
 
 fetch(apiUrl).then(function(response) {
     // request was successful
     if (response.ok) {
         response.json().then(function(data) {
             console.log(data)
-          createDailyPage(data)
+          createDailyPage(data);
           var lat = data.coord.lat;
           var lon = data.coord.lon;
-          var apiUrlUv =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=95692f2c0e1a1b5e25327de5d590734c`;
+          var apiUrlUv =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=95692f2c0e1a1b5e25327de5d590734c`
           // nested api
          return fetch(apiUrlUv)
           }).then(function(response) {
@@ -117,7 +117,7 @@ fetch(apiUrl).then(function(response) {
           }).then(function(data){
             console.log(data)
             console.log(data.current.uvi)
-            fetchUv(data)
+            fetchUv(data);
           });
         } else {
           alert("Error: " + response.statusText);
