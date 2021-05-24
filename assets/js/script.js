@@ -141,6 +141,7 @@ searchBtn.addEventListener("click", getData);
 
 document.querySelector("#buttons").addEventListener("click", function(e){
   console.log(e);
+  // IT IS CEHEKING IF THE CLIECKED PLACE IS A BUTTON OR NOT
   if(e.target.nodeName ==="BUTTON") { 
   document.querySelector("#searchTerm").value =  e.target.textContent;}
   else{
