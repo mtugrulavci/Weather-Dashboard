@@ -42,7 +42,6 @@ function createForecastPage(data)  {
 
 function fetchUv (data){
 uvi.innerHTML = "";
-console.log("here")
 var pUvi = document.createElement("p");
 pUvi.textContent= "  UV Index :  "; 
 var pSpan = document.createElement("span");
@@ -98,7 +97,8 @@ storage.reverse(); // reversed again to keep it that way
 
 function getData (searchTerm){
 var searchTerm = document.querySelector("#searchTerm").value;
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm +  "&appid=95692f2c0e1a1b5e25327de5d590734c";
+//var resultBtn = document.querySelector("#buttons").value;
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c";
 var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`;
 
 fetch(apiUrl).then(function(response) {
@@ -138,3 +138,9 @@ fetch(apiUrlFive).then(function(response) {
       };
 
 searchBtn.addEventListener("click", getData);
+document.querySelector("#buttons").addEventListener("click", function(e){
+  document.querySelector("#searchTerm").value =e.target.textContent;
+  getData()
+});
+
+
