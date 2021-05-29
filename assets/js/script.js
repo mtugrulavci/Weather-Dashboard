@@ -26,11 +26,11 @@ function createForecastPage(data)  {
     var dt = document.createElement("p");
       dt.textContent = date;
     var pTemp = document.createElement("p");
-      pTemp.textContent = "Temperature :" + data.list[i].main.temp;
+      pTemp.textContent = "Temperature :" + data.list[i].main.temp +" °C";
     var pHum = document.createElement("p");
-      pHum.textContent = "Humidity :" +data.list[i].main.humidity;
+      pHum.textContent = "Humidity :" +data.list[i].main.humidity +" %";
     var pWind = document.createElement("p");
-      pWind.textContent = "Wind :" +data.list[i].wind.speed;
+      pWind.textContent = "Wind :" +data.list[i].wind.speed + " MPH";
     foreEl.appendChild(dt);
     foreEl.appendChild(image_f);
     foreEl.appendChild(pTemp);
@@ -99,7 +99,7 @@ function getData (searchTerm){
 var searchTerm = document.querySelector("#searchTerm").value;
 //var resultBtn = document.querySelector("#buttons").value;
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c&units=metric"
-var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`
+var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477&units=metric`
 
 fetch(apiUrl).then(function(response) {
     // request was successful
