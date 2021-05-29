@@ -55,7 +55,7 @@ else{
 pSpan.textContent = uv.current.uvi
 pUvi.appendChild(pSpan)
 uvi.appendChild(pUvi);
-}
+};
 
 function createDailyPage(data){
   imageDaily.innerHTML = "";
@@ -72,7 +72,7 @@ function createDailyPage(data){
 
   // city name, date and icon is represented on the html 
   weatherContainer.innerHTML = `<h2> ${cityData} </h2>`;
-  temperature.innerHTML= "  Temperature : " + data.main.temp + " K";
+  temperature.innerHTML= "  Temperature : " + data.main.temp + " °C";
   humidity.innerHTML = "  Humidity : " + data.main.humidity + " %";
   wind.innerHTML = "  Wind : " + data.wind.speed + " MPH";
   // store search values in the array initially created 
@@ -86,7 +86,7 @@ function createDailyPage(data){
   }
   storage.reverse();
   localStorage.setItem('searchList', JSON.stringify(storage)); 
-}
+};
 //to have the local storage data on the page even though you don"t search a city, the for loop is also applied outside of the class
 storage.reverse(); // reversed multiple times to get the latest one always up
 for(var i = 0; i< storage.length; i++){
@@ -98,7 +98,7 @@ storage.reverse(); // reversed again to keep it that way
 function getData (searchTerm){
 var searchTerm = document.querySelector("#searchTerm").value;
 //var resultBtn = document.querySelector("#buttons").value;
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c"
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&appid=95692f2c0e1a1b5e25327de5d590734c&units=metric"
 var apiUrlFive = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=dd622459b78841be1f2f087475975477`
 
 fetch(apiUrl).then(function(response) {
@@ -149,5 +149,14 @@ document.querySelector("#buttons").addEventListener("click", function(e){
   }
   getData()
 });
+
+
+// gets user IP address
+/*
+let apiKey = '50e887ce-e3bb-4f00-a9b9-667597db5539';
+$.getJSON('https://ipfind.co/me?auth=' + apiKey, function(data) {
+  console.log(JSON.stringify(data, null, 2));
+}); */
+
 
 
